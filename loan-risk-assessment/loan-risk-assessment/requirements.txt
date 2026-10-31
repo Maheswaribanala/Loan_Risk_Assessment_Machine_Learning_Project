@@ -1,0 +1,23 @@
+# Core web
+Flask==3.1.3
+
+# Data & ML
+pandas==3.0.2
+numpy==2.4.4
+scikit-learn==1.8.0
+joblib==1.5.3
+matplotlib==3.10.8
+
+# Optional but specified in the original tech stack.
+# Not installable in the offline sandbox this project was built in
+# (no internet access) — GradientBoostingClassifier (sklearn) and a
+# from-scratch SMOTE (ml/smote_custom.py) are used in their place.
+# Install these on a machine with internet access to use the originals:
+xgboost>=2.0.0        # optional — swap into ml/train_models.py's MODELS dict
+imbalanced-learn>=0.12 # optional — swap smote_custom.SMOTE for imblearn's SMOTE
+
+# Optional — only needed if you switch backend/database/db.py to real MySQL
+# mysql-connector-python>=8.0
+
+# Optional — only needed for notebooks/loan_risk_analysis.ipynb
+# jupyter

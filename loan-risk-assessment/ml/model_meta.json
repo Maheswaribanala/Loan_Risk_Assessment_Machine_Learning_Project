@@ -1,0 +1,19 @@
+{
+  "best_model_name": "Logistic Regression",
+  "classes": [
+    "High",
+    "Low",
+    "Medium"
+  ],
+  "metrics": {
+    "model": "Logistic Regression",
+    "accuracy": 0.7133,
+    "precision": 0.7084,
+    "recall": 0.7133,
+    "f1_score": 0.7097,
+    "roc_auc": 0.8711,
+    "cv_f1_mean": 0.7547,
+    "train_time_sec": 0.8
+  },
+  "trained_at": "2026-08-11T09:08:43.275738"
+}

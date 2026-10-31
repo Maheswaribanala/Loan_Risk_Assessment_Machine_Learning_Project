@@ -1,0 +1,62 @@
+[
+  {
+    "feature": "num__credit_history",
+    "importance": 1.28176
+  },
+  {
+    "feature": "num__applicant_income",
+    "importance": 0.7433
+  },
+  {
+    "feature": "cat__repayment_history_Average",
+    "importance": 0.73905
+  },
+  {
+    "feature": "cat__repayment_history_Poor",
+    "importance": 0.72752
+  },
+  {
+    "feature": "num__total_income",
+    "importance": 0.688
+  },
+  {
+    "feature": "cat__repayment_history_Good",
+    "importance": 0.65383
+  },
+  {
+    "feature": "cat__employment_status_Self-Employed",
+    "importance": 0.64378
+  },
+  {
+    "feature": "num__existing_loans",
+    "importance": 0.55947
+  },
+  {
+    "feature": "cat__repayment_history_Excellent",
+    "importance": 0.49713
+  },
+  {
+    "feature": "num__income_stability_score",
+    "importance": 0.49381
+  },
+  {
+    "feature": "num__loan_to_income_ratio",
+    "importance": 0.47083
+  },
+  {
+    "feature": "cat__self_employed_No",
+    "importance": 0.44153
+  },
+  {
+    "feature": "num__debt_to_income_ratio",
+    "importance": 0.41157
+  },
+  {
+    "feature": "cat__self_employed_Yes",
+    "importance": 0.40541
+  },
+  {
+    "feature": "num__coapplicant_income",
+    "importance": 0.3885
+  }
+]

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loan Risk Assessment — Intelligent Loan Risk Assessment System</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="lra-nav"></div>
+
+<section class="py-5" style="background:#fff; border-bottom:1px solid var(--ledger-line);">
+  <div class="container">
+    <div class="section-eyebrow mb-2">Applicant Intake</div>
+    <h1 class="section-title" style="font-size:2rem;">Loan Risk Assessment</h1>
+    <p class="text-secondary" style="max-width:640px;">Fill in the applicant's financial and personal details below.
+      All fields marked <span class="text-danger">*</span> are required. The prediction is generated live by the
+      trained ML model — nothing here is pre-scripted.</p>
+  </div>
+</section>
+
+<section class="container py-4 pb-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-9">
+
+      <div id="formErrorBox" class="alert-error-box mb-4 d-none"></div>
+
+      <form id="assessmentForm" novalidate>
+
+        <div class="card p-4">
+
+          <div class="form-section-title">Applicant Information</div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Applicant Name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" name="applicant_name" required>
+              <div class="invalid-feedback">Please enter the applicant's name.</div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Age <span class="text-danger">*</span></label>
+              <input type="number" class="form-control" name="age" min="18" max="100" required>
+              <div class="invalid-feedback">Age must be between 18 and 100.</div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Gender <span class="text-danger">*</span></label>
+              <select class="form-select" name="gender" required>
+                <option value="">Select</option>
+                <option>Male</option><option>Female</option><option>Other</option>
+              </select>
+              <div class="invalid-feedback">Please select a gender.</div>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label">Marital Status <span class="text-danger">*</span></label>
+              <select class="form-select" name="marital_status" required>
+                <option value="">Select</option>
+                <option>Single</option><option>Married</option><option>Divorced</option>
+              </select>
+              <div class="invalid-feedback">Please select marital status.</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Education <span class="text-danger">*</span></label>
+              <select class="form-select" name="education" required>
+                <option value="">Select</option>
+                <option>Graduate</option><option>Not Graduate</option>
+              </select>
+              <div class="invalid-feedback">Please select education level.</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Dependents <span class="text-danger">*</span></label>
+              <select class="form-select" name="dependents" required>
+                <option value="">Select</option>
+                <option value="0">0</option><option value="1">1</option>
+                <option value="2">2</option><option value="3">3+</option>
+              </select>
+              <div class="invalid-feedback">Please select number of dependents.</div>
+            </div>
+          </div>
+
+          <div class="form-section-title">Employment &amp; Income</div>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label">Employment Status <span class="text-danger">*</span></label>
+              <select class="form-select" name="employment_status" required>
+                <option value="">Select</option>
+                <option>Salaried</option><option>Self-Employed</option>
+                <option>Business Owner</option><option>Unemployed</option>
+              </select>
+              <div class="invalid-feedback">Please select employment status.</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Self Employed?</label>
+              <select class="form-select" name="self_employed">
+                <option value="No">No</option><option value="Yes">Yes</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Property / Asset Area</label>
+              <select class="form-select" name="property_area">
+                <option value="">Select</option>
+                <option>Urban</option><option>Semiurban</option><option>Rural</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Applicant Monthly Income (₹) <span class="text-danger">*</span></label>
+              <input type="number" class="form-control" name="applicant_income" min="0" step="0.01" required>
+              <div class="invalid-feedback">Enter a valid non-negative income.</div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Co-applicant Monthly Income (₹)</label>
+              <input type="number" class="form-control" name="coapplicant_income" min="0" step="0.01" value="0">
+            </div>
+          </div>
+
+          <div class="form-section-title">Loan Details</div>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label">Loan Amount (₹) <span class="text-danger">*</span></label>
+              <input type="number" class="form-control" name="loan_amount" min="1" step="0.01" required>
+              <div class="invalid-feedback">Loan amount must be greater than 0.</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Loan Term (months) <span class="text-danger">*</span></label>
+              <select class="form-select" name="loan_term" required>
+                <option value="">Select</option>
+                <option value="12">12</option><option value="36">36</option>
+                <option value="60">60</option><option value="84">84</option>
+                <option value="120">120</option><option value="180">180</option>
+                <option value="240">240</option><option value="360">360</option>
+              </select>
+              <div class="invalid-feedback">Please select a loan term.</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Existing Loans</label>
+              <input type="number" class="form-control" name="existing_loans" min="0" value="0">
+            </div>
+          </div>
+
+          <div class="form-section-title">Credit Profile</div>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label">Credit Score (300&ndash;900)</label>
+              <input type="number" class="form-control" name="credit_score" min="300" max="900" placeholder="e.g. 700">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Previous Repayment History</label>
+              <select class="form-select" name="repayment_history">
+                <option value="">Select</option>
+                <option>Excellent</option><option>Good</option>
+                <option>Average</option><option>Poor</option>
+                <option>No History</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end mt-4">
+            <button type="submit" class="btn btn-gold btn-lg" id="submitBtn">
+              <span id="submitLabel">Predict Loan Risk →</span>
+              <span id="submitSpinner" class="spinner-ledger ms-2 d-none"></span>
+            </button>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<div id="lra-footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/script.js"></script>
+<script>
+renderNavbar("assessment");
+
+const form = document.getElementById("assessmentForm");
+const errorBox = document.getElementById("formErrorBox");
+const submitBtn = document.getElementById("submitBtn");
+const submitLabel = document.getElementById("submitLabel");
+const submitSpinner = document.getElementById("submitSpinner");
+
+function showFormError(msg) {
+  errorBox.textContent = msg;
+  errorBox.classList.remove("d-none");
+  errorBox.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+function hideFormError() {
+  errorBox.classList.add("d-none");
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  hideFormError();
+
+  if (!form.checkValidity()) {
+    e.stopPropagation();
+    form.classList.add("was-validated");
+    showFormError("Please fix the highlighted fields before submitting.");
+    return;
+  }
+  form.classList.add("was-validated");
+
+  const formData = new FormData(form);
+  const payload = {};
+  for (const [key, value] of formData.entries()) {
+    payload[key] = value === "" ? null : value;
+  }
+  // Coerce numeric fields
+  ["age","dependents","applicant_income","coapplicant_income","loan_amount",
+   "loan_term","credit_score","existing_loans"].forEach(f => {
+    if (payload[f] !== null && payload[f] !== undefined) {
+      const n = Number(payload[f]);
+      payload[f] = isNaN(n) ? payload[f] : n;
+    }
+  });
+
+  submitBtn.disabled = true;
+  submitLabel.textContent = "Predicting...";
+  submitSpinner.classList.remove("d-none");
+
+  try {
+    const result = await apiFetch("/api/predict", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+    sessionStorage.setItem("lra_last_result", JSON.stringify(result));
+    window.location.href = "result.html";
+  } catch (err) {
+    showFormError(err.message || "Something went wrong while predicting risk. Please try again.");
+    submitBtn.disabled = false;
+    submitLabel.textContent = "Predict Loan Risk →";
+    submitSpinner.classList.add("d-none");
+  }
+});
+</script>
+</body>
+</html>

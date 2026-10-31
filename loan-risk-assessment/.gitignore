@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+*.db
+backend/database/loan_risk_assessment.db
+.DS_Store
+.ipynb_checkpoints/
+*.log
